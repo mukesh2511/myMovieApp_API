@@ -15,6 +15,7 @@ export const verifyToken = async (req, res, next) => {
       return next(createError(403, "Token is not valid"));
     }
     req.userId = payload.id;
+    req.isAdmin = payload.isAdmin;
     next();
   });
 };

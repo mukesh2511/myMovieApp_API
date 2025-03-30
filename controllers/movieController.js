@@ -6,6 +6,9 @@ import {
 } from "../utils/fileUpload.js";
 
 export const addMultipleMovies = async (req, res, next) => {
+  if (req.isAdmin === false) {
+    return next(createError(403, "You are not authorized to add movies."));
+  }
   try {
     const { page } = req.body;
 
@@ -89,6 +92,9 @@ export const getAllMovies = async (req, res, next) => {
 };
 
 export const addMovie = async (req, res, next) => {
+  if (req?.isAdmin === false) {
+    return next(createError(403, "You are not authorized to add movies."));
+  }
   try {
     const {
       title,
@@ -115,6 +121,10 @@ export const addMovie = async (req, res, next) => {
   }
 };
 export const editMovie = async (req, res, next) => {
+  console.log({ iaadmin: req.isAdmin });
+  if (req.isAdmin === false) {
+    return next(createError(403, "You are not authorized to add movies."));
+  }
   try {
     const { id } = req.params;
     const {
@@ -146,6 +156,9 @@ export const editMovie = async (req, res, next) => {
   }
 };
 export const deleteMovie = async (req, res, next) => {
+  if (req.isAdmin === false) {
+    return next(createError(403, "You are not authorized to add movies."));
+  }
   try {
     const { id } = req.params;
     const movie = await Movie.findByIdAndDelete(id);

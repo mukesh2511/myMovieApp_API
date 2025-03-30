@@ -10,14 +10,15 @@ import {
 } from "../controllers/movieController.js";
 import express from "express";
 import { poster } from "../utils/fileUpload.js";
+import { verifyToken } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 router.get("/allmovies", getAllMovies);
-router.post("/addmoviemultiple", addMultipleMovies);
-router.post("/addmovie", addMovie);
-router.put("/editmovie/:id", editMovie);
-router.delete("/deletemovie/:id", deleteMovie);
+router.post("/addmoviemultiple", verifyToken, addMultipleMovies);
+router.post("/addmovie", verifyToken, addMovie);
+router.put("/editmovie/:id", verifyToken, editMovie);
+router.delete("/deletemovie/:id", verifyToken, deleteMovie);
 router.get("/getmovie/:id", getMovieById);
 router.post("/upload", poster, uploadPoster);
 router.post("/deleteposter", deletePoster);
