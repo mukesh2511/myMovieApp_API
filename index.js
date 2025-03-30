@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-// import connectDb from "./utils/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoute from "./routes/authRoute.js";
@@ -21,7 +20,7 @@ const connectDb = async (mongo_URl) => {
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:5174"],
+  origin: ["http://localhost:5174", "https://mymovieapp-client.onrender.com"],
   credentials: true,
 };
 app.use(cors(corsOptions));
